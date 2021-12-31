@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
 
 @Controller('cats')
 export class CatsController {
-  constructor(private readonly catsService: CatsService) {}
+  constructor(private readonly catsService: CatsService) { }
 
   @Post()
   create(@Body() createCatDto: CreateCatDto) {
@@ -17,18 +17,18 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.catsService.findOne(+id);
+  @Get(':name')
+  findOne(@Param('name') name: string) {
+    return this.catsService.findOne(name);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
-    return this.catsService.update(+id, updateCatDto);
+  @Put(':name')
+  update(@Param('name') name: string, @Body() updateCatDto: UpdateCatDto) {
+    return this.catsService.update(name, updateCatDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.catsService.remove(+id);
+  @Delete(':name')
+  remove(@Param('name') name: string) {
+    return this.catsService.remove(name);
   }
 }
